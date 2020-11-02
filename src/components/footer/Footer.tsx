@@ -6,7 +6,7 @@ import s from './Footer.module.scss';
 const Footer = () => {
   return (
     <div className={cn(s.footer)}>
-      <span>footer</span> <span>Ours Team</span>
+      <span>Make with</span> <span>Ours Team</span>
     </div>
   );
 };
