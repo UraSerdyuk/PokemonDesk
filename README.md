@@ -1,2 +1,3 @@
 # PokemonDesk
- this is it 
+
+yarn tsm src/
