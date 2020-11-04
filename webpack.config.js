@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { mainModule } = require('process');
 
 const NODE_ENV = process.env.NODE_ENV;
 module.exports = {
@@ -11,6 +12,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
+  },
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/,
+    poll: 1000,
   },
   module: {
     rules: [
@@ -40,6 +46,10 @@ module.exports = {
           },
           'sass-loader',
         ],
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader'],
       },
     ],
   },
