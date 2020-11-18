@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
-const usePokemons = () => {
+import req from '../utils/request';
+
+const useData = (endpoint: string, query: object, deps: any[] = []) => {
   const [data, SetData] = useState({ total: 0, pokemons: [] });
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -8,9 +10,8 @@ const usePokemons = () => {
   useEffect(() => {
     try {
       const getPokemons = async () => {
-        const response = await fetch('http://zar.hosthot.ru/api/v1/pokemons');
-        const datas = await response.json();
-        SetData(datas);
+        const response = await req(endpoint, query);
+        SetData(response);
       };
       getPokemons();
     } catch (e) {
@@ -18,9 +19,9 @@ const usePokemons = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, deps);
 
   return { data, isLoading, isError };
 };
 
-export default usePokemons;
+export default useData;
